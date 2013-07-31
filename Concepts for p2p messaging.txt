@@ -35,3 +35,6 @@ IMPLEMENTATION SUGGESTION:
 Each session should have session keys that are not stored anywhere after the session, and the keys are passed via a secure channel so no ISP (no ISP nor user, so deniable encryption is possible. If the user knows the keys, it defeats the purpose) has access to them.
 Save only the chat logs of the previous session (or two, maybe have a parametric option for this) by default. Have the option to disable saving any chat logs or enable save all chat logs this.
 Save the chat logs in plaintext by default. Have the option to save them in encrypted form accompanied with the public keys.
+
+Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the page “GNU Free Documentation License”.
+The copyright and license notices on this page only apply to the text on this page. Any software described in this text has its own copyright notice and license, which can usually be found in the distribution itself.
