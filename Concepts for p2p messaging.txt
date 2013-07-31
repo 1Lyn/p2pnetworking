@@ -1,0 +1,37 @@
+1. Connecting to the correct peer without disposing anyone’s IP
+Each peer has a table consisting of information of each user/public key
+Public key P1
+Encrypted nickname associated with the public key P1(N)
+IP addresses associated with the public key encrypted with private key
+Only the person who someone is trying to contact can answer to the contact request.
+(after initial contact, hold IP addresses in local cache and try to initialise contact with that IP afterwards. if initialisation doesn’t work, search for the peer again.)
+Example of table entry: PublicKey | PrivateKey(myCuteNickname) | PublicKey(IP)
+Requesting contact:
+Encrypt your own IP with the person’s public key you are trying to contact
+Append encrypted IP addresses associated with the person’s public key you are trying to contact
+Send contact request to P2P network. Request consists of [your IP address only decryptable with recipient’s private key] and [the recipient’s IP addresses encrypted with their public key]
+This way the following holds true:
+Only the correct recipient can contact you by decrypting your IP with their private key.
+The distributed table contains recipient’s IP encrypted with their public key so only they can read their IP and verify that they are the correct recipient. If the contact request goes to the wrong person, they can’t read the correct recipient’s IP address.
+By initialising contact you can save the correct IP in your local cache so this process has to be done only once, or when IP changes.
+Metadata of the conversation is available only to the two parties
+
+2. Fate of messages saved in chat logs and ISP’s logs
+Ability to deny the content of messages in case you hold information you can’t admit to possess or can’t admit to have created; two cases
+By using rubberhose-filesystem -like method to hide data, you can deny possessing information sent by the other party (that is, only if you save chat logs in plaintext since you can’t create secondary useless information you would decrypt because you don’t possess the other party’s private key)
+By saving all chat logs in plaintext you can argue that you never wrote the messages (or that you faked them)
+Ability to verify the content of messages in case of lawsuits (e.g. patents, harassment)
+By saving the chat logs in the form of encrypted messages accompanied with the other party’s public key you can verify that these messages were sent by the other party, since they are the only private key holders.
+Logging of conversations can be disabled client side. (It would be extremely beneficial to be able to take a look at previous conversation, but also respect a users desire to go off the record)
+ISP can hold encrypted messages and demand that you decrypt the messages for law enforcement
+Could be solved with perfect forward secrecy http://en.wikipedia.org/wiki/Perfect_forward_secrecy
+Do ISPs have access to the very first keys that they could use to derive future keys? It is important that the session keys are transmitted through a secure tunnel.
+CONCLUSION:
+Disposable session keys are a must to enable deniable encryption.
+Save chat logs as encrypted, accompanied with public key to be able to verify.
+It is not necessary to do deniable encryption, for one can just say they do not save chat logs, and actually hide the chat logs elsewhere.
+By saving chat logs as encrypted by default, a normal user has to be careful of what they say, if saving chat logs was by default in plaintext, no user should worry too much, since only advanced users would configure the settings to save the messages as encrypted.
+IMPLEMENTATION SUGGESTION:
+Each session should have session keys that are not stored anywhere after the session, and the keys are passed via a secure channel so no ISP (no ISP nor user, so deniable encryption is possible. If the user knows the keys, it defeats the purpose) has access to them.
+Save only the chat logs of the previous session (or two, maybe have a parametric option for this) by default. Have the option to disable saving any chat logs or enable save all chat logs this.
+Save the chat logs in plaintext by default. Have the option to save them in encrypted form accompanied with the public keys.
